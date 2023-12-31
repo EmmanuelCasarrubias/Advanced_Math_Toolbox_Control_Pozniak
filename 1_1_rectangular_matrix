@@ -1,0 +1,63 @@
+"""
+Rectangular Matrix Creation
+
+Author: Emmanuel Casarrubias
+Date: December 31, 2023
+
+This Python script allows the user to define the dimensions of a rectangular matrix and input values for its elements. The script creates a symbolic representation of the matrix with LaTeX-like notation, providing both the symbolic matrix and the matrix with values.
+
+The user is prompted to enter the values for the number of rows (m) and columns (n) of the matrix. Then, the user is asked to input the values for each element of the matrix using subscript notation (a_{i,j}).
+
+The script generates two representations of the matrix:
+1. A symbolic representation, which displays the matrix as A = [a_{1,1}, a_{1,2}, ...; a_{m,1}, a_{m,2}, ...], highlighting the symbolic notation.
+2. A representation with actual values, which shows the matrix elements as follows:
+   Matrix A (Values):
+   [[a_{1,1}, a_{1,2}, ...]
+    [a_{m,1}, a_{m,2}, ...]]
+
+This code is intended for educational purposes to illustrate matrix creation and symbolic notation in Python.
+"""
+
+import numpy as np
+
+# Ask the user to enter the values for m and n to define the dimensions of the matrix
+m = int(input("Enter the value of m for matrix A: "))
+n = int(input("Enter the value of n for matrix A: "))
+
+# Create an m x n matrix initialized with zeros
+A = np.zeros((m, n), dtype=int)  # Use dtype=int to store integer values by default
+
+# Request the user to enter the values for each element of the matrix
+print("Enter the values for the elements of the matrix:")
+for i in range(m):
+    for j in range(n):
+        # Use subscript notation for clarity
+        A[i, j] = float(input(f"Enter the value of a_{{{i+1},{j+1}}}: "))
+
+# Print the symbolic representation of the matrix
+print("\nMatrix A (Symbolic):")
+print("A = [", end="")
+for i in range(m):
+    for j in range(n):
+        print(f"a_{{{i+1},{j+1}}}", end="")
+        if j != n - 1:
+            print(", ", end="")
+    if i != m - 1:
+        print(";")
+        print(" " * len("A = ["), end="")  # Aligning the rows with the opening bracket
+    else:
+        print("]")
+
+# Print the symbolic representation of the matrix with values
+print("\nMatrix A (Values):")
+for i in range(m):
+    if i == 0:
+        print("A =", end=" ")
+    else:
+        print("   ", end=" ")
+    print("[", end="")
+    for j in range(n):
+        print(f"{A[i, j]}", end="")
+        if j != n - 1:
+            print(", ", end="")
+    print("]" if i == m - 1 else "]")
