@@ -1,0 +1,70 @@
+% Rectangular Matrix Creation
+
+% Author: Emmanuel Casarrubias
+% Date: December 31, 2023
+
+% This MATLAB script allows the user to define the dimensions of a rectangular matrix and input values for its elements.
+% The script creates a symbolic representation of the matrix with LaTeX-like notation, providing both the symbolic matrix and the matrix with values.
+% The user is prompted to enter the values for the number of rows (m) and columns (n) of the matrix. Then, the user is asked to input the values for each element of the matrix using subscript notation (a_{i,j}).
+% The script generates two representations of the matrix:
+% 1. A symbolic representation, which displays the matrix as A = [a_{1,1}, a_{1,2}, ...; a_{m,1}, a_{m,2}, ...], highlighting the symbolic notation.
+% 2. A representation with actual values, which shows the matrix elements as follows:
+%    Matrix A (Values):
+%    [[a_{1,1}, a_{1,2}, ...]
+%     [a_{m,1}, a_{m,2}, ...]]
+
+% Ask the user to enter the values for m and n to define the dimensions of the matrix
+m = input('Enter the value of m for matrix A: ');
+n = input('Enter the value of n for matrix A: ');
+
+% Create an m x n matrix initialized with zeros
+A = zeros(m, n);
+
+% Request the user to enter the values for each element of the matrix
+fprintf('Enter the values for the elements of the matrix:\n');
+for i = 1:m
+    for j = 1:n
+        % Use subscript notation for clarity
+        A(i, j) = input(['Enter the value of a_{', num2str(i), ',', num2str(j), '}: ']);
+    end
+end
+
+% Print the symbolic representation of the matrix
+fprintf('\nMatrix A (Symbolic):\nA = [');
+for i = 1:m
+    fprintf('  [');
+    for j = 1:n
+        fprintf('a_{%d,%d}', i, j);
+        if j ~= n
+            fprintf(', ');
+        end
+    end
+    fprintf(']');
+    if i ~= m
+        fprintf('\n');
+    else
+        fprintf(']\n');
+    end
+end
+
+% Print the symbolic representation of the matrix with values
+fprintf('\nMatrix A (Values):\n');
+for i = 1:m
+    if i == 1
+        fprintf('A = [');
+    else
+        fprintf('     ');
+    end
+    fprintf('[');
+    for j = 1:n
+        fprintf('%d', A(i, j));
+        if j ~= n
+            fprintf(', ');
+        end
+    end
+    if i == m
+        fprintf(']]\n');
+    else
+        fprintf('];\n');
+    end
+end
